@@ -10,10 +10,6 @@ function API_SC2(data){
 
 	document.getElementById('undocked6').innerHTML='<a href="'+data.devtracker[0].link+'" target="_blank">'+data.devtracker[0].author+' say : '+data.devtracker[0].msg+'</a><br />';
 
-
-	var pub_display = Math.floor(Math.random()* parseInt(data.pub.total));
-		document.getElementById('undocked7').innerHTML='<a href="'+data.pub[pub_display].link+'"><img class="pub" src="'+data.pub[pub_display].img+'" alt="pub" width="100%"  ></a>';
-	
 }
 
 function API_SC(data) {
