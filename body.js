@@ -1,4 +1,3 @@
-
 function create_bars(is_docked){
 document.getElementById('bars').innerHTML=''; //reinit
 	for (var i=1;i<=nb_bar_undock;i++){
@@ -13,7 +12,7 @@ function API_SC2(data){
 
 
 	var pub_display = Math.floor(Math.random()* parseInt(data.pub.total));
-		document.getElementById('undocked7').innerHTML='<a href="'+data.pub[pub_display].link+'"><img class="pub" src="'+data.pub[pub_display].img+'" alt="pub" width="220" height="50" ></a>';
+		document.getElementById('undocked7').innerHTML='<a href="'+data.pub[pub_display].link+'"><img class="pub" src="'+data.pub[pub_display].img+'" alt="pub" width="100%"  ></a>';
 	
 }
 
