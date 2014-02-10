@@ -1,0 +1,43 @@
+body{
+	background:black;
+	font-weight: bold;
+	font-size: 15px;
+	font-family: Courier new;
+	color: #00c0ff;
+	font-family: Courier New;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+a{
+color:lightyellow;
+}
+
+#gadgetContent{
+	margin-top: 5px;
+	overflow: hidden;
+}
+	
+#amount {
+	padding-left: 19px;
+}
+
+.bars {
+	padding: 3px 1px;
+}
+
+#content {
+	display: none;
+	padding: 3px 0 0 8px;
+}
+#undocked1, #undocked2, #undocked3, #undocked4, #undocked5, #undocked6, #undocked7 {
+	display:none;
+}
+
+#img_load {
+	margin-top: 50px;
+}
+.pub{
+border:1px solid #00c0ff;
+margin-top:2px;
+}
