@@ -126,10 +126,10 @@ function check_pledge(){
             }
             else{		
 				if( !current_anim2){
-				   $( "#percent2" ).text( data.stat.data.alpha_slots_percentage );
+				   $( "#percent2" ).text( percent_max2 );
 					nb_bar2 = Math.floor(nb_bars*percent_max2 / 100);	
 					for (var i=1; i<=nb_bar2; i++){
-					  $('#bar_'+i).attr('src','on.png');
+					  $('#bar2_'+i).attr('src','on.png');
 					}					
                 }
 				else{
