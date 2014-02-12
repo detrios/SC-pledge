@@ -2,18 +2,18 @@ body{
  background:black;
  color: #00c0ff;
 }
-.bars {
+.bars, .bars2 {
 background: #021018;
 padding: 10px;
 margin: 15px 10px;
 border-radius: 18px 1px;
 max-width:336px;
 }
-.bars img{
+.bars img, .bars2 img{
  padding:1px;
 }
 
-.progress {
+.progress, .progress2 {
 color: #00c0ff;
 font-family: Courier New;
 font-size: 14px;
@@ -23,5 +23,9 @@ font-weight:bold;
 
 #ret, #citizens{
  color: #4BF173;
+ font-weight:bold;
+}
+#citizens_max{
+color:orange;
  font-weight:bold;
 }

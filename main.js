@@ -1,6 +1,9 @@
 var first_check=0;
+var first_check2=0;
 var percent_max = 0;
+var percent_max2 = 0;
 var current_anim = true;
+var current_anim2 = true;
 var nb_bars = 33;
 
 
@@ -16,6 +19,7 @@ function progress() {
     val ++;
 
     $( "#percent" ).text(val);
+
 	// 39 bar = 100%  => 1 bar = 2,5%
 	//nb_bar allumÃ© = 39 * percent / 100
 	nb_bar = Math.floor(nb_bars*val / 100);
@@ -24,15 +28,40 @@ function progress() {
  		for (var i=1; i<=nb_bar; i++){
 		 $('#bar_'+i).attr('src','on.png');
 		}
-		console.log('val '+val+' percent '+percent_max);
+
+		//console.log('val '+val+' percent '+percent_max);
     if ( val < percent_max ) {
         setTimeout( progress, 30 );
     }
     else{
         current_anim = false;
     }
+
 }
-//http://www.starpirates.fr/API/API.php
+function progress2() {
+
+
+	var val2 = parseInt($("#percent2").html());
+    val2 ++;
+
+ 
+	$( "#percent2" ).text(val2);
+
+	nb_bar2 = Math.floor(nb_bars*val2 / 100);
+ 
+
+		
+		for (var i=1; i<=nb_bar2; i++){
+		 $('#bar2_'+i).attr('src','on.png');
+		}
+
+	if ( val2 < percent_max2 ) {
+        setTimeout( progress2, 30 );
+    }
+    else{
+        current_anim2 = false;
+    }
+}
 
 function check_pledge(){
  
@@ -46,12 +75,19 @@ function check_pledge(){
         success: function(data) {
             $('#ret').html(data.current_pledge.us);
             $('#citizens').html(number_format(data.stat.data.fans,0,'.',','));
+			$('#citizens_max').html(number_format(parseInt(data.stat.data.fans)+parseInt(data.stat.data.alpha_slots_left),0,'.',','));
+			$('#day_passed').html(data.day_passed[0].day+'<br />');
+			$('#day_passed').append(data.day_passed[1].day);
             first_check++;
+			first_check2++;
             percent_max = data.current_pledge.percentless;
+			percent_max2 = data.stat.data.alpha_slots_percentage;
+
 			
             
             if(first_check==1){
             	$('.bars img').attr('src','off.png');
+
                 if(percent_max>0){        
                     setTimeout( progress, 3000 );                 
                 }
@@ -72,6 +108,32 @@ function check_pledge(){
                 }
 				else{
 					//console.log('anim in progress...');
+				}
+				
+            }
+			
+			
+			if(first_check2==1){
+				$('.bars2 img').attr('src','off.png');
+
+				if(percent_max2>0){    				
+                    setTimeout( progress2, 3000 );                 
+                }
+				else{
+				 current_anim2 = false;
+				}
+                
+            }
+            else{		
+				if( !current_anim2){
+				   $( "#percent2" ).text( data.stat.data.alpha_slots_percentage );
+					nb_bar2 = Math.floor(nb_bars*percent_max2 / 100);	
+					for (var i=1; i<=nb_bar2; i++){
+					  $('#bar_'+i).attr('src','on.png');
+					}					
+                }
+				else{
+					//console.log('anim2 in progress...');
 				}
             }
                  
@@ -111,10 +173,15 @@ function number_format (number, decimals, dec_point, thousands_sep) {
 
 $(document).ready(function (){
  var bar_gen = '';
+ var bar_gen2 = '';
  for (var i=1; i<=nb_bars; i++){
  	bar_gen+='<img src="off.png" alt="|" id="bar_'+i+'"/>';
  }
+ for (var i=1; i<=nb_bars; i++){
+ 	bar_gen2+='<img src="off.png" alt="|" id="bar2_'+i+'"/>';
+ }
  $('#bar').html(bar_gen);
+ $('#bar2').html(bar_gen2);
  check_pledge();
 setInterval(check_pledge,60000); //refresh all minutes
 
