@@ -50,7 +50,7 @@ function check_pledge(){
         dataType: 'jsonp',
         data:'action=funding-goals',
         success: function(data) {
-            console.log(data);
+            $('#connection').html('');
             $('#ret').html('$'+number_format(data.stat.data.funds/100,0,'.',','));
             $('#citizens').html(number_format(data.stat.data.fans,0,'.',','));
 
