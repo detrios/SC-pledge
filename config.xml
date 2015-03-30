@@ -1,12 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.eckume.starcitizen" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.eckume.starcitizenPledge" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <preference name="phonegap-version" value="3.6.3" />
     <name>SC pledges</name>
     <description>
        Fan app about star citizen who display information in real time.
-	   See quickly all the important informations.
+	   See quickly the current pledge.
     </description>
     <author email="developpeurntic@gmail.com" href="http://vps36292.ovh.net/mordu/">
-        Detrios
+        Gourmand
     </author>
 	<feature name="http://api.phonegap.com/1.0/network"/>
 <feature name="http://api.phonegap.com/1.0/device" />

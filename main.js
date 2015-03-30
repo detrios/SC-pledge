@@ -38,30 +38,7 @@ function progress() {
     }
 
 }
-function progress2() {
 
-
-	var val2 = parseInt($("#percent2").html());
-    val2 ++;
-
- 
-	$( "#percent2" ).text(val2);
-
-	nb_bar2 = Math.floor(nb_bars*val2 / 100);
- 
-
-		
-		for (var i=1; i<=nb_bar2; i++){
-		 $('#bar2_'+i).attr('src','on.png');
-		}
-
-	if ( val2 < percent_max2 ) {
-        setTimeout( progress2, 30 );
-    }
-    else{
-        current_anim2 = false;
-    }
-}
 
 function check_pledge(){
  
@@ -73,18 +50,14 @@ function check_pledge(){
         dataType: 'jsonp',
         data:'action=funding-goals',
         success: function(data) {
-            $('#ret').html(data.current_pledge.us);
+            console.log(data);
+            $('#ret').html('$'+number_format(data.stat.data.funds/100,0,'.',','));
             $('#citizens').html(number_format(data.stat.data.fans,0,'.',','));
-			$('#citizens_max').html(number_format(parseInt(data.stat.data.fans)+parseInt(data.stat.data.alpha_slots_left),0,'.',','));
-			$('#day_passed').html(data.day_passed[0].day+'<br />');
-			$('#day_passed').append(data.day_passed[1].day);
-            first_check++;
-			first_check2++;
-            percent_max = data.current_pledge.percentless;
-			percent_max2 = data.stat.data.alpha_slots_percentage;
 
-			
-            
+            first_check++;
+
+            percent_max = Math.floor(((data.stat.data.funds/100)%1000000)/10000);
+
             if(first_check==1){
             	$('.bars img').attr('src','off.png');
 
@@ -111,32 +84,7 @@ function check_pledge(){
 				}
 				
             }
-			
-			
-			if(first_check2==1){
-				$('.bars2 img').attr('src','off.png');
 
-				if(percent_max2>0){    				
-                    setTimeout( progress2, 3000 );                 
-                }
-				else{
-				 current_anim2 = false;
-				}
-                
-            }
-            else{		
-				if( !current_anim2){
-				   $( "#percent2" ).text( percent_max2 );
-					nb_bar2 = Math.floor(nb_bars*percent_max2 / 100);	
-					for (var i=1; i<=nb_bar2; i++){
-					  $('#bar2_'+i).attr('src','on.png');
-					}					
-                }
-				else{
-					//console.log('anim2 in progress...');
-				}
-            }
-                 
         },
         error: function(e) {
           
@@ -173,37 +121,16 @@ function number_format (number, decimals, dec_point, thousands_sep) {
 
 $(document).ready(function (){
  var bar_gen = '';
- var bar_gen2 = '';
+
  for (var i=1; i<=nb_bars; i++){
  	bar_gen+='<img src="off.png" alt="|" id="bar_'+i+'"/>';
  }
- for (var i=1; i<=nb_bars; i++){
- 	bar_gen2+='<img src="off.png" alt="|" id="bar2_'+i+'"/>';
- }
+
  $('#bar').html(bar_gen);
- $('#bar2').html(bar_gen2);
+
  check_pledge();
-setInterval(check_pledge,60000); //refresh all minutes
+setInterval(check_pledge,30000); //refresh all 30sec
 
-
-$.ajax({
-   type: 'GET',
-    url: 'http://www.starpirates.fr/API/API.php',
-    jsonpCallback: 'API_SC2',
-    contentType: "application/json",
-    dataType: 'jsonp',
-    data:'action=ship',
-    async:true,
-    success: function(data) {
-       $('#ship').html('');
-		for(var i =0; i< data.ship.total; i++){
-			$('#ship').append('<img width="90" onclick="location.href=this.src" src="https://robertsspaceindustries.com/rsi/static/images/game/ship-specs/'+data.ship[i].imageurl+'" style="float:left" />'+data.ship[i].manufacturer+' : '+data.ship[i].title+'<br style="clear:both" />');
-		}
-    },
-    error: function(e) {
-       console.log(e.message);
-    }
-});
 
 });
 
